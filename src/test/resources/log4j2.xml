@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration status="WARN">
+    <appenders>
+        <Console name="STDOUT">
+            <PatternLayout>
+                <pattern>%d %p %c{1.}:%L [%t] %m%n</pattern>
+            </PatternLayout>
+        </Console>
+    </appenders>
+    <loggers>
+        <logger name="org.gaofamily.zookeeper" level="ALL" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+        </logger>
+        <root level="WARN">
+            <AppenderRef ref="STDOUT"/>
+        </root>
+    </loggers>
+</configuration>
