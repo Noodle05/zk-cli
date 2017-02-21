@@ -102,6 +102,7 @@ public class ZkCliTest implements Watcher {
         try {
             AtomicBoolean synced = new AtomicBoolean(false);
             zkCli.syncFolder(folder, "/", zkClient, name -> {
+                logger.debug("Sync folder done.");
                 lock.lock();
                 try {
                     synced.compareAndSet(false, true);
@@ -110,6 +111,7 @@ public class ZkCliTest implements Watcher {
                     lock.unlock();
                 }
             }, exps -> {
+                logger.debug("Sync folder done with {} exceptions.", exps.size());
                 exceptions.putAll(exps);
                 lock.lock();
                 try {
@@ -128,6 +130,8 @@ public class ZkCliTest implements Watcher {
                     logger.debug("Path: {} got exception.", np, exp);
                 });
                 Assert.fail("Copy folder failed.");
+            } else {
+                logger.info("Sync folder success.");
             }
         } finally {
             zkClient.close();
